@@ -1,9 +1,9 @@
 const nsNotice = (options) => {
   const {
-    text,
+    text = '',
     duration = 3000,
     type = 'success',
-    top = 20
+    top = 50
   } = options
 
   const notice = document.createElement('div')
