@@ -1,16 +1,28 @@
-const nsNotice = (message, noticeType = 'success', duration = 3000) => {
+const nsNotice = (options) => {
+  const {
+    text,
+    duration = 3000,
+    type = 'success',
+    top = 20
+  } = options
+
   const notice = document.createElement('div')
-
   notice.className = 'ns-notice'
-  notice.classList.add(`ns-notice-${noticeType}`)
+  notice.classList.add(`ns-notice-${type}`)
+  notice.textContent = text
 
-  notice.textContent = message
+  notice.style.position = 'fixed'
+  notice.style.top = `${top}px`
+  notice.style.left = '50%'
+  notice.style.transform = 'translateX(-50%)'
+  notice.style.opacity = '0'
+  notice.style.transition = 'opacity 0.5s ease'
+
+  document.body.appendChild(notice)
 
   setTimeout(() => {
     notice.style.opacity = '1'
-  }, 500)
-
-  document.body.appendChild(notice)
+  }, 100)
 
   setTimeout(() => {
     notice.style.opacity = '0'
