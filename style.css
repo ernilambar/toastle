@@ -1,6 +1,6 @@
 .ns-notice {
   position: fixed;
-  top: 70px;
+  top: 40px;
   background-color: #333333;
   color: #fff;
   padding: 10px 20px;
@@ -16,9 +16,17 @@
 }
 
 .ns-notice-success {
-  background: #4CAF50;
+  background-color: #068f29;
 }
 
 .ns-notice-error {
-  background: #F44336;
+  background-color: #b82c2e;
+}
+
+.ns-notice-info {
+  background-color: #72aee6;
+}
+
+.ns-notice-warning {
+  background-color: #dba617;
 }
