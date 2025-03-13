@@ -1,16 +1,24 @@
 .ns-notice {
-	position: fixed;
-	top: 70px;
-	background-color: #333333;
-	color: #fff;
-	padding: 10px 20px;
-	border-radius: 5px;
-	font-family: Arial, sans-serif;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-	z-index: 1000;
-	opacity: 0;
-	max-width: fit-content;
-	left: 50%;
-	transform: translateX(-50%);
-	transition: opacity 0.5s ease-in-out;
+  position: fixed;
+  top: 70px;
+  background-color: #333333;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  opacity: 0;
+  max-width: fit-content;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 0.5s ease-in-out;
+}
+
+.ns-notice-success {
+  background: #4CAF50;
+}
+
+.ns-notice-error {
+  background: #F44336;
 }
