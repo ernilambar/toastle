@@ -1,0 +1,16 @@
+{
+  "name": "ns-notice",
+  "version": "1.0.0",
+  "description": "Minimal JS notice helper",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "files": [
+    "index.js",
+    "style.css"
+  ]
+}
