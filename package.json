@@ -1,7 +1,7 @@
 {
-  "name": "ns-notice",
+  "name": "toastle",
   "version": "1.0.0",
-  "description": "Minimal JS notice helper",
+  "description": "Minimal toast message.",
   "main": "index.js",
   "scripts": {
     "format": "standard --fix"
