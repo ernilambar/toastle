@@ -1,4 +1,4 @@
-.ns-notice {
+.toastle {
   position: fixed;
   top: 40px;
   background-color: #333333;
@@ -15,18 +15,18 @@
   transition: opacity 0.5s ease-in-out;
 }
 
-.ns-notice-success {
+.toastle-success {
   background-color: #068f29;
 }
 
-.ns-notice-error {
+.toastle-error {
   background-color: #b82c2e;
 }
 
-.ns-notice-info {
+.toastle-info {
   background-color: #72aee6;
 }
 
-.ns-notice-warning {
+.toastle-warning {
   background-color: #dba617;
 }

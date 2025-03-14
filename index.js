@@ -1,4 +1,4 @@
-const nsNotice = (options) => {
+const Toastle = (options) => {
   const {
     text = '',
     duration = 3000,
@@ -7,8 +7,8 @@ const nsNotice = (options) => {
   } = options
 
   const notice = document.createElement('div')
-  notice.className = 'ns-notice'
-  notice.classList.add(`ns-notice-${type}`)
+  notice.className = 'toastle'
+  notice.classList.add(`toastle-${type}`)
   notice.textContent = text
 
   notice.style.position = 'fixed'
@@ -33,4 +33,4 @@ const nsNotice = (options) => {
   }, duration)
 }
 
-module.exports = nsNotice
+module.exports = Toastle
