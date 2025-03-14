@@ -3,17 +3,35 @@
   "version": "1.0.0",
   "description": "Minimal toast message.",
   "main": "index.js",
-  "scripts": {
-    "format": "standard --fix"
+  "keywords": [
+    "toast"
+  ],
+  "author": "Nilambar Sharma",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ernilambar/toastle.git"
   },
-  "keywords": [],
-  "author": "",
+  "homepage": "https://github.com/ernilambar/toastle#readme",
   "license": "MIT",
   "files": [
     "index.js",
     "style.css"
   ],
+  "prettier": {
+    "semi": true,
+    "printWidth": 80,
+    "tabWidth": 2,
+    "useTabs": false,
+    "singleQuote": true,
+    "jsxSingleQuote": false,
+    "bracketSameLine": true,
+    "arrowParens": "avoid",
+    "endOfLine": "lf"
+  },
   "devDependencies": {
-    "standard": "^17.1.2"
+    "prettier": "^3.5.3"
+  },
+  "scripts": {
+    "format": "prettier \"**/*.{css,js,json}\" --write"
   }
 }
