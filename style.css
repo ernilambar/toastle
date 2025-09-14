@@ -1,6 +1,5 @@
 .toastle {
   position: fixed;
-  top: 40px;
   background-color: #333333;
   color: #fff;
   padding: 10px 20px;
@@ -12,7 +11,10 @@
   max-width: fit-content;
   left: 50%;
   transform: translateX(-50%);
-  transition: opacity 0.5s ease-in-out;
+  transition:
+    opacity 0.5s ease-in-out,
+    top 0.3s ease;
+  margin-bottom: 10px;
 }
 
 .toastle-success {

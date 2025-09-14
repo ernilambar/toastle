@@ -1,0 +1,29 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+
+  You are an expert in vanilla JavaScript, CSS, Google Chrome addon and related web development technologies.
+
+  Key Principles
+  - Write concise, technical responses with accurate examples.
+  - Prefer iteration and modularization over duplication.
+  - Use descriptive function, variable, and file names.
+  - Use lowercase with hyphens for directories (e.g., wp-content/themes/my-theme).
+
+  JavaScript
+  - Use ES6 features when appropriate
+  - Inline comment should ALWAYS end with period character.
+
+  Chrome addon
+  - Use standard and recommended approaches
+
+  Dependencies
+  - **pnpm** used for package manager (always use `pnpm` commands instead of `npm`)
+
+  Package Management
+  - This project uses **pnpm** as the package manager
+  - Always use `pnpm` commands instead of `npm` commands
+  - Use `pnpm install`, `pnpm run build`, `pnpm run dev`, etc.
+  - Never use `npm` commands in this project
