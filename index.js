@@ -11,7 +11,7 @@ const Toastle = options => {
 
   // Calculate position based on existing toasts.
   const toastHeight = 40; // Approximate height including margin.
-  const spacing = 5;
+  const spacing = 3;
   const currentTop = top + activeToasts.length * (toastHeight + spacing);
 
   notice.style.position = 'fixed';
