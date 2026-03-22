@@ -25,7 +25,6 @@ tmp/
 
 yarn-error.log
 npm-debug.log
-.pnpm-debug.log
 
 # Ignored extensions
 *~

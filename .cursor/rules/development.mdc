@@ -19,11 +19,5 @@ alwaysApply: true
   Chrome addon
   - Use standard and recommended approaches
 
-  Dependencies
-  - **pnpm** used for package manager (always use `pnpm` commands instead of `npm`)
-
-  Package Management
-  - This project uses **pnpm** as the package manager
-  - Always use `pnpm` commands instead of `npm` commands
-  - Use `pnpm install`, `pnpm run build`, `pnpm run dev`, etc.
-  - Never use `npm` commands in this project
+  Package management
+  - This project uses **npm** as the package manager (use `npm` for install, run, and related commands).
