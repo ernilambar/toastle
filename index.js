@@ -4,7 +4,8 @@ const activeToasts = []
 
 const ALLOWED_TYPES = new Set(['success', 'error', 'info', 'warning'])
 
-const SPACING = 4
+// Vertical gap between stacked toasts (px). Default `.toastle` margin-bottom is 0 so this is the only default gap.
+const SPACING = 9
 
 /**
  * @param {number} value
