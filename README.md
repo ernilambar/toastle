@@ -21,7 +21,7 @@ npm install toastle
 ### Basic Usage
 
 ```javascript
-const Toastle = require('toastle');
+import Toastle from 'toastle';
 
 // Simple success toast.
 Toastle({ text: 'Operation completed successfully!' });
@@ -33,6 +33,8 @@ Toastle({
   duration: 5000
 });
 ```
+
+On the server or anywhere `document` / `document.body` is missing, `Toastle` does nothing (no throw), so SSR and headless tests can import it safely. Call it from the browser when the DOM is ready.
 
 ### Configuration Options
 
@@ -50,12 +52,12 @@ Toastle({
 - `info` - Blue background for informational messages
 - `warning` - Orange background for warnings
 
-### CSS Integration
+### CSS
 
-Include the provided CSS file in your project:
+With a bundler, import the stylesheet from your app entry or a component:
 
-```html
-<link rel="stylesheet" href="node_modules/toastle/style.css">
+```javascript
+import 'toastle/style.css'
 ```
 
 ## License

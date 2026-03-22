@@ -1,37 +1,57 @@
 {
   "name": "toastle",
-  "version": "1.0.2",
-  "description": "Minimal toast message.",
-  "main": "index.js",
+  "version": "2.0.0",
+  "description": "Lightweight vanilla JavaScript toast notifications — zero dependencies, ESM.",
+  "type": "module",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js",
+    "./style.css": "./style.css"
+  },
   "keywords": [
-    "toast"
+    "toast",
+    "notification",
+    "notify",
+    "alert",
+    "snackbar",
+    "message",
+    "vanilla-js",
+    "javascript",
+    "esm",
+    "zero-dependencies",
+    "lightweight",
+    "ui",
+    "browser"
   ],
-  "author": "Nilambar Sharma",
+  "author": {
+    "name": "Nilambar Sharma",
+    "url": "https://github.com/ernilambar"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ernilambar/toastle.git"
   },
+  "bugs": {
+    "url": "https://github.com/ernilambar/toastle/issues"
+  },
   "homepage": "https://github.com/ernilambar/toastle#readme",
   "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
   "files": [
+    "CHANGELOG.md",
     "index.js",
     "style.css"
   ],
-  "prettier": {
-    "semi": true,
-    "printWidth": 80,
-    "tabWidth": 2,
-    "useTabs": false,
-    "singleQuote": true,
-    "jsxSingleQuote": false,
-    "bracketSameLine": true,
-    "arrowParens": "avoid",
-    "endOfLine": "lf"
-  },
   "devDependencies": {
-    "prettier": "^3.5.3"
+    "happy-dom": "^20.8.4",
+    "standard": "^17.1.2",
+    "vitest": "^4.1.0"
   },
   "scripts": {
-    "format": "prettier \"**/*.{css,js,json}\" --write"
+    "lint": "standard",
+    "lint:fix": "standard --fix",
+    "test": "vitest run"
   }
 }
