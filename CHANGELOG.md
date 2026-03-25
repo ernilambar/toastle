@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.1.0] - 2026-03-25
+
+* Added - Global `globalThis` registry so duplicate bundles share stack.
+
 ## [2.0.0] - 2026-03-22
 
 * **Breaking** - ESM-only: use `import Toastle from 'toastle'`; CommonJS `require('toastle')` is no longer supported.
