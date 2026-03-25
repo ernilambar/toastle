@@ -1,11 +1,38 @@
 /* eslint-env browser */
-// Track active toasts for stacking.
-const activeToasts = []
-
 const ALLOWED_TYPES = new Set(['success', 'error', 'info', 'warning'])
 
 // Vertical gap between stacked toasts (px). Default `.toastle` margin-bottom is 0 so this is the only default gap.
 const SPACING = 9
+
+const REGISTRY_KEY = Symbol.for('toastle.registry.v1')
+
+/**
+ * @typedef {object} ToastleRegistry
+ * @property {1} apiVersion
+ * @property {Map<string, HTMLElement[]>} stacks
+ */
+
+/**
+ * @returns {ToastleRegistry | null}
+ */
+function getOrCreateRegistry () {
+  if (typeof globalThis === 'undefined') {
+    return null
+  }
+  let reg = globalThis[REGISTRY_KEY]
+  if (!reg || typeof reg !== 'object' || reg.apiVersion !== 1 || !(reg.stacks instanceof Map)) {
+    reg = { apiVersion: 1, stacks: new Map() }
+    globalThis[REGISTRY_KEY] = reg
+  }
+  return reg
+}
+
+/**
+ * @param {number} top
+ */
+function registryKeyForTop (top) {
+  return String(top)
+}
 
 /**
  * @param {number} value
@@ -51,6 +78,11 @@ const Toastle = rawOptions => {
     return
   }
 
+  const reg = getOrCreateRegistry()
+  if (!reg) {
+    return
+  }
+
   const options =
     rawOptions !== null && typeof rawOptions === 'object' ? rawOptions : {}
 
@@ -65,6 +97,13 @@ const Toastle = rawOptions => {
   const duration = clampFiniteNumber(durationRaw, 3000, 0, 86400000)
   const top = clampFiniteNumber(topRaw, 40, -10000, 10000)
   const type = ALLOWED_TYPES.has(typeRaw) ? typeRaw : 'success'
+  const stackKey = registryKeyForTop(top)
+
+  let activeToasts = reg.stacks.get(stackKey)
+  if (!activeToasts) {
+    activeToasts = []
+    reg.stacks.set(stackKey, activeToasts)
+  }
 
   const notice = document.createElement('div')
   notice.className = 'toastle'
@@ -85,10 +124,12 @@ const Toastle = rawOptions => {
   document.body.appendChild(notice)
   activeToasts.push(notice)
 
-  applyStackPositions(activeToasts, top, SPACING)
-  requestAnimationFrame(() => {
+  const reflowStack = () => {
     applyStackPositions(activeToasts, top, SPACING)
-  })
+  }
+
+  reflowStack()
+  requestAnimationFrame(reflowStack)
 
   setTimeout(() => {
     notice.style.opacity = '1'
@@ -103,7 +144,11 @@ const Toastle = rawOptions => {
         activeToasts.splice(index, 1)
       }
 
-      applyStackPositions(activeToasts, top, SPACING)
+      if (activeToasts.length === 0) {
+        reg.stacks.delete(stackKey)
+      } else {
+        reflowStack()
+      }
 
       notice.remove()
     }, 500)

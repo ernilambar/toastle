@@ -2,7 +2,21 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import Toastle from './index.js'
 
+// Mirrors index.js SPACING for stack offset assertions.
+const SPACING = 9
+
+// Must stay aligned with `REGISTRY_KEY` in index.js.
+const TOASTLE_REGISTRY_KEY = Symbol.for('toastle.registry.v1')
+
+function clearToastleRegistryInTestScope () {
+  const reg = globalThis[TOASTLE_REGISTRY_KEY]
+  if (reg?.stacks instanceof Map) {
+    reg.stacks.clear()
+  }
+}
+
 beforeEach(() => {
+  clearToastleRegistryInTestScope()
   document.body.innerHTML = ''
   vi.stubGlobal('requestAnimationFrame', cb => {
     cb()
@@ -15,6 +29,41 @@ afterEach(() => {
   vi.restoreAllMocks()
   vi.useRealTimers()
 })
+
+function stubToastRects (height = 50) {
+  return vi.spyOn(Element.prototype, 'getBoundingClientRect').mockImplementation(
+    function () {
+      if (!this.classList?.contains('toastle')) {
+        return {
+          height: 0,
+          width: 0,
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          x: 0,
+          y: 0,
+          toJSON () {
+            return {}
+          }
+        }
+      }
+      return {
+        height,
+        width: 100,
+        top: 0,
+        left: 0,
+        right: 100,
+        bottom: height,
+        x: 0,
+        y: 0,
+        toJSON () {
+          return {}
+        }
+      }
+    }
+  )
+}
 
 describe('Toastle (DOM)', () => {
   it('creates a toast with base class, type class, and text', () => {
@@ -48,38 +97,7 @@ describe('Toastle (DOM)', () => {
   })
 
   it('stacks later toasts below earlier ones when height is known', () => {
-    vi.spyOn(Element.prototype, 'getBoundingClientRect').mockImplementation(
-      function () {
-        if (!this.classList?.contains('toastle')) {
-          return {
-            height: 0,
-            width: 0,
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            x: 0,
-            y: 0,
-            toJSON () {
-              return {}
-            }
-          }
-        }
-        return {
-          height: 50,
-          width: 100,
-          top: 0,
-          left: 0,
-          right: 100,
-          bottom: 50,
-          x: 0,
-          y: 0,
-          toJSON () {
-            return {}
-          }
-        }
-      }
-    )
+    stubToastRects(50)
 
     Toastle({ text: 'first', top: 10 })
     Toastle({ text: 'second', top: 10 })
@@ -88,6 +106,52 @@ describe('Toastle (DOM)', () => {
     const firstTop = Number.parseFloat(toasts[0].style.top)
     const secondTop = Number.parseFloat(toasts[1].style.top)
     expect(secondTop).toBeGreaterThan(firstTop)
+  })
+
+  it('does not stack toasts that use different top offsets', () => {
+    stubToastRects(50)
+
+    Toastle({ text: 'high', top: 10 })
+    Toastle({ text: 'low', top: 200 })
+    const toasts = document.querySelectorAll('.toastle')
+    expect(toasts.length).toBe(2)
+    expect(Number.parseFloat(toasts[0].style.top)).toBe(10)
+    expect(Number.parseFloat(toasts[1].style.top)).toBe(200)
+  })
+
+  it('uses one global stack per top so duplicate bundles would share that queue', () => {
+    stubToastRects(40)
+
+    Toastle({ text: 'one', top: 30 })
+    Toastle({ text: 'two', top: 30 })
+    const toasts = document.querySelectorAll('.toastle')
+    expect(toasts.length).toBe(2)
+    expect(Number.parseFloat(toasts[0].style.top)).toBe(30)
+    expect(Number.parseFloat(toasts[1].style.top)).toBe(30 + 40 + SPACING)
+  })
+
+  it('ignores unknown option keys and still stacks by top', () => {
+    stubToastRects(28)
+
+    Toastle({ text: 'a', top: 18, stackId: 'ignored', lane: 'ignored' })
+    Toastle({ text: 'b', top: 18 })
+    const toasts = document.querySelectorAll('.toastle')
+    expect(toasts.length).toBe(2)
+    expect(Number.parseFloat(toasts[1].style.top)).toBe(18 + 28 + SPACING)
+  })
+
+  it('clearing the global registry lets a new toast reuse base top after prior stack', () => {
+    vi.useFakeTimers()
+    stubToastRects(50)
+
+    Toastle({ text: 'a', top: 12, duration: 999999 })
+    Toastle({ text: 'b', top: 12, duration: 999999 })
+    clearToastleRegistryInTestScope()
+    Toastle({ text: 'c', top: 12, duration: 999999 })
+
+    const toasts = document.querySelectorAll('.toastle')
+    expect(toasts.length).toBe(3)
+    expect(Number.parseFloat(toasts[2].style.top)).toBe(12)
   })
 
   it('completes fade-in, fade-out, and removal on timers without throwing', () => {
