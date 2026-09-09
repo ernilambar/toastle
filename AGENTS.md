@@ -2,11 +2,11 @@
 
 ## Overview
 
-Toastle is a lightweight, zero-dependency vanilla JavaScript toast notification library (ESM-only). Core stack is plain JS + CSS (`index.js`, `style.css`) tested with Vitest + happy-dom and linted with Standard on Node >= 20.
+Toastle is a lightweight, zero-dependency vanilla JavaScript toast notification library (ESM-only). Core stack is plain JS + CSS (`index.js`, `style.css`) tested with Vitest + happy-dom and linted with Neostandard (ESLint 9) on Node >= 22.
 
 ## Setup
 
-Requires Node.js >= 20, no env vars or extra config.
+Requires Node.js >= 22, no env vars or extra config.
 
 ```sh
 npm ci

@@ -1,4 +1,3 @@
-/* eslint-env browser */
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import Toastle from './index.js'
 

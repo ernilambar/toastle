@@ -2,12 +2,6 @@
   "name": "toastle",
   "version": "2.1.0",
   "description": "Lightweight vanilla JavaScript toast notifications — zero dependencies, ESM.",
-  "type": "module",
-  "main": "./index.js",
-  "exports": {
-    ".": "./index.js",
-    "./style.css": "./style.css"
-  },
   "keywords": [
     "toast",
     "notification",
@@ -16,42 +10,46 @@
     "snackbar",
     "message",
     "vanilla-js",
-    "javascript",
     "esm",
-    "zero-dependencies",
-    "lightweight",
     "ui",
     "browser"
   ],
-  "author": {
-    "name": "Nilambar Sharma",
-    "url": "https://github.com/ernilambar"
+  "homepage": "https://github.com/ernilambar/toastle#readme",
+  "bugs": {
+    "url": "https://github.com/ernilambar/toastle/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ernilambar/toastle.git"
   },
-  "bugs": {
-    "url": "https://github.com/ernilambar/toastle/issues"
-  },
-  "homepage": "https://github.com/ernilambar/toastle#readme",
   "license": "MIT",
-  "engines": {
-    "node": ">=20"
+  "author": {
+    "name": "Nilambar Sharma",
+    "url": "https://github.com/ernilambar"
   },
+  "type": "module",
+  "exports": {
+    ".": "./index.js",
+    "./style.css": "./style.css"
+  },
+  "main": "./index.js",
   "files": [
     "CHANGELOG.md",
     "index.js",
     "style.css"
   ],
+  "scripts": {
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "test": "vitest run"
+  },
   "devDependencies": {
+    "eslint": "^9.39.5",
     "happy-dom": "^20.8.4",
-    "standard": "^17.1.2",
+    "neostandard": "^0.13.0",
     "vitest": "^4.1.0"
   },
-  "scripts": {
-    "lint": "standard",
-    "lint:fix": "standard --fix",
-    "test": "vitest run"
+  "engines": {
+    "node": ">=22"
   }
 }

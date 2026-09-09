@@ -1,4 +1,3 @@
-/* eslint-env browser */
 const ALLOWED_TYPES = new Set(['success', 'error', 'info', 'warning'])
 
 // Vertical gap between stacked toasts (px). Default `.toastle` margin-bottom is 0 so this is the only default gap.

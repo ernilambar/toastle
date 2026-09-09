@@ -1,5 +1,4 @@
 // @vitest-environment node
-/* eslint-env node */
 
 import { describe, expect, it } from 'vitest'
 
