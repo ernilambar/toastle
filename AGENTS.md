@@ -17,7 +17,7 @@ npm ci
 - Build: N/A — no build step, ship `index.js` and `style.css` as-is.
 - Test: `npm test`
 - Lint: `npm run lint`
-- Format: `npm run lint:fix`
+- Format: `npm run format`
 - Typecheck: N/A — no TypeScript, JSDoc types only.
 
 ## Conventions

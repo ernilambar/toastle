@@ -39,8 +39,8 @@
     "style.css"
   ],
   "scripts": {
+    "format": "eslint --fix",
     "lint": "eslint",
-    "lint:fix": "eslint --fix",
     "test": "vitest run"
   },
   "devDependencies": {
@@ -51,5 +51,8 @@
   },
   "engines": {
     "node": ">=22"
+  },
+  "allowScripts": {
+    "fsevents@2.3.3": true
   }
 }
