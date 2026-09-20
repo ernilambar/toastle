@@ -62,4 +62,4 @@ import 'toastle/style.css'
 
 ## License
 
-MIT © [Nilambar Sharma](https://github.com/ernilambar)
+[MIT](LICENSE) © [Nilambar Sharma](https://www.nilambar.net)
